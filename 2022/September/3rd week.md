@@ -19,11 +19,11 @@
 ### Sep 24~25
 
 - Struggled with bugs, errors, and all kinds of technical issues.
-- It was tough days. I've felt hugh pressure for whole time.
+- It was a tough day. I've felt huge pressure the whole time.
 - However, I learned lots of lessons from it.
-  - Bugs are everywhere, even in now.
-  - When I audit codes, I must have a mindset that there will be bugs in codes written by me or my colleagues.
-  - In contrast, if someone find critical bugs in live product, it is not a problem of developer who wrote the codes, but the team and process itself.
+  - Bugs are everywhere, even now.
+  - When I audit codes, I must have a mindset that there will be bugs definitely in codes written by me or my colleagues.
+  - In contrast, if someone finds critical bugs in a live product, it is not a problem of the developer who wrote the codes, but the team and process itself.
   - Don't need to blame yourself or your colleagues for the live bugs. Seems hard to stop blaming yourself, but it's the truth. It's not your fault.
   - Better to be more imaginative when writing test cases.
   - "The more the better" for test cases.
