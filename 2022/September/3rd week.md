@@ -1,5 +1,12 @@
 # 3rd Week, September
 
+### Summary
+
+- A tough week overall.
+- Although I got stressed so much, I learned many precious lessons.
+- I think it'd be better to stop thinking that I have to do well, I have to be better than it. These thoughts affect me as poison.
+- Just let everything go and simply do. Don't need to be perfect. It's ok to do sucks. In fact, everything is fine.
+
 ### Monday Sep 19
 
 - learned differences between maxFeePerGas and maxPriorityFeePerGas. EIP 1559.
