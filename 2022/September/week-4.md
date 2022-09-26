@@ -34,4 +34,3 @@
   - Don't need to blame yourself or your colleagues for the live bugs. It seems hard to stop blaming yourself, but it's the truth. It's not your fault.
   - Better to be more imaginative when writing test cases.
   - "The more the better" is always true for writing test cases.
-    v
