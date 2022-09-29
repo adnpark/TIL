@@ -7,7 +7,7 @@
 
 ### Tue~Wed, Sep 27~28
 
-- Solved one Ethernaut state: Shop. I've missed the point, but could solve it with other creative way. Learned a lot from it.
+- Solved one Ethernaut stage: Shop. I've missed the point, but could solve it with other creative way. Learned a lot from it.
 - Learned that maxFeePerGas is not sum of maxPriorityFeePerGas and BaseFeePerGas.
   - maxFeePerGas is maximum gas price can be applied to transaction.
   - maxPriorityFeePerGas is maximum gas price can be paid to validators.
@@ -15,3 +15,8 @@
   - PriorityFee can be paid from (maxFeePerGas - BaseFeePerGas), and it cannot be greater than maxPriorityFeePerGas.
   - So technically, (BaseFeePerGas + maxPriorityFeePerGas) can be greater than maxFeePerGas.
 - Learned that default getFeeData api of provider in Polygon network is not working properly. It returns very low level of fee data resulting in failure of transaction with 'transaction underpriced'.
+
+### Thu, Sep 29
+
+- Solved Etheranut stage: Denial. Could solve with simple reentrancy trick. Good chance to remind me of transfer, send, call methods and its caveats.
+- Learned various methods of Object. Seems to be good to get used to using functional programming style.
