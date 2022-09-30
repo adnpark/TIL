@@ -20,3 +20,9 @@
 
 - Solved Etheranut stage: Denial. Could solve with simple reentrancy trick. Good chance to remind me of transfer, send, call methods and its caveats.
 - Learned various methods of Object. Seems to be good to get used to using functional programming style.
+
+### Fri, Sep 30
+
+- Learned how to use Jest test suite. Learned how to mocking modules, functions. spyOn() method is just awesome, it helps to mock function result in unit of single action.
+- Made a PR for fixing gas related issues. Learned that most of transaction failures are caused by gas issues.
+- Tried to solve Ethernaut: Dex, but failed. I'll try it tomorrow again. It'd be better to run in local environment for getting feedback quickly.
