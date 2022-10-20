@@ -49,6 +49,7 @@
 
 ### Thu 20
 
+- Tried to solve Secureum RACE-10 problem sets. Only got 4 out of 8. It's not that bad actually, I'll make a note for RACE-10 and publish it in Korean and English.
 - Read part of [Solidity 101](https://secureum.substack.com/p/solidity-101)
   - NatSpec: Ethereum Natural Language Specification Format. It is recommended that Solidity contracts are fully annotated using NatSpec for all public interfaces (everything in the ABI).
     - @notice is for end users.
