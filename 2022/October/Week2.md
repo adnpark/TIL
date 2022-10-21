@@ -64,3 +64,30 @@
       - can be assigned only once
     - _The compiler does not reserve a storage slot for these variables, and every occurrence is replaced by the respective value._ (???)
   -
+
+### Fri 21
+
+- Read part of [Solidity 101](https://secureum.substack.com/p/solidity-101)
+  - Function Modifiers
+    - The function’s control flow continues after the `_` in the preceding modifier.
+    - Expression of the modifier after `_` is executed after function body executed.
+    - The `_` symbol can appear in the modifier multiple times. Each occurrence is replaced with the function body.
+  - Function Mutability Specifiers: Functions can be specified as being `pure` or `view`:
+    - view functions can read contract state but cannot modify it. This is enforced at runtime via `STATICCALL` opcode.
+    - The following are considered state modifying:
+      - 1. Writing to state variables
+      - 2. Emitting events
+      - 3. Creating other contracts
+      - 4. Using selfdestruct
+      - 5. Sending Ether via calls
+      - 6. Calling any function not marked view or pure
+      - 7. Using low-level calls
+      - 8. Using inline assembly that contains certain opcodes.
+    - The following are considered reading from state:
+      - 1. Reading from state variables
+      - 2. Accessing address(this).balance or <address>.balance
+      - 3. Accessing any of the members of block, tx, msg (with the exception of msg.sig and msg.data)
+      - 4. Calling any function not marked pure
+      - 5. Using inline assembly that contains certain opcodes.
+  - It is not possible to prevent functions from reading the state at the level of the EVM.
+    - It is only possible to prevent them from writing to the state via STATICCALL. **Therefore, only view can be enforced at the EVM level, but not pure.**
