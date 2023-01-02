@@ -91,3 +91,8 @@
       - 5. Using inline assembly that contains certain opcodes.
   - It is not possible to prevent functions from reading the state at the level of the EVM.
     - It is only possible to prevent them from writing to the state via STATICCALL. **Therefore, only view can be enforced at the EVM level, but not pure.**
+
+### Mon 24
+
+- Learned that cannot reuse unpublished version of npm packages.
+  - `package-name@version is unique, and cannot be reused by unpublishing and re-publishing it. We recommend publishing a minor version update instead.`
