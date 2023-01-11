@@ -15,3 +15,5 @@
 - 온체인과 관련된 문제 발생시 항상 온체인 -> 오프체인 순으로 확인을 해보면 좋을것 같다. 온체인 자체에서 문제가 발생하는 경우도 종종 있다. 그리고 온체인 문제 파악은 tx만 보면 되니까 상대적으로 파악이 빠르다.
 - Secureum RACE-13 오답노트 1번 작성
   - 문제를 정확하게 이해하고 관련된 코드 라인을 정확하게 파악하는것이 중요하다. 이것만 해도 1~2 문제는 더 맞출 수 있을것 같다.
+- vscode의 typescript go to definition이 source code로 가지 않고 d.ts 파일로 이동하는 문제를 픽스했다.
+  - tsconfig의 compilerOptions에서 "declarationMap": true 를 추가하면 된다.
