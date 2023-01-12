@@ -17,3 +17,14 @@
   - 문제를 정확하게 이해하고 관련된 코드 라인을 정확하게 파악하는것이 중요하다. 이것만 해도 1~2 문제는 더 맞출 수 있을것 같다.
 - vscode의 typescript go to definition이 source code로 가지 않고 d.ts 파일로 이동하는 문제를 픽스했다.
   - tsconfig의 compilerOptions에서 "declarationMap": true 를 추가하면 된다.
+
+### Thu, Jan 12
+
+- Secureum RACE-13 오답노트 2번 작성
+  - unchecked 가 안전한지 여부는 해당 unchecked 뿐만 아니라 전체 코드 컨텍스트를 살펴볼 필요가 있다.
+  - 예를 들어 `unchcked{ balances[to] += amount }` 에서 만약 decimal이 높아서 amount가 매우 큰 값이 주어져 overflow가 발생할 수 있다고 생각할 수 있지만, totalSupply 자체가 max(uint256)을 초과하지 않는다면 오버플로가 발생할 일이 없게 된다.
+  - 이처럼 unchecked 블록 자체만 중요한게 아니라 체크하지 않는 변수가 어떤 맥락에 있는지 파악하는게 중요하다.
+- 프로덕션 백엔드 배포를 진행했다.
+  - 그 과정에서 DB 마이그레이션을 여러가지 신경쓸게 많아서 매우 조심스럽게 진행했다.
+  - 어떤 순서로 작업해야 하는지 체크리스트를 만들고 순서대로 작업하는 방식은 확실히 도움이 많이 됐다.
+  - update, set SQL query문에 대해서 알게 되었다. SQL에 대한 근본적인 이해를 쌓아야 할 필요를 느낀다. Database 기초 강의를 한번 쭉 달려보면 좋을것 같다.
