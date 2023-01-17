@@ -14,3 +14,50 @@
   - 대충 작업의 방향은 어느정도 나온것 같다. 아주 기초적인 코드들만 작업해뒀다.
   - 여전히 블랙박스인건 1) 어떻게 하면 slack bot으로 http message를 전송할 수 있는가 2) 어떻게 하면 Threshold 도달시 알람 횟수를 제한할 수 있을까이다.
   - 이 부분에 대해서 내일 고민해보자. 그리고 이 기회에 config를 다루는법도 익혀보면 좋겠다.
+
+### Tue, Jan 17
+
+- 오퍼레이터 어카운트 잔액 부족 알람 봇 작업
+  - 다시 조금 헤매고 있다. 그래도 방향을 다시 잡았다.
+  - alert, alarm, notification을 구분하기
+  - 지금 내가 하려는것은 alert와 notification이다.
+  - alert는 pagerDuty를 사용하자. 이걸 직접 구현하려면 DB도 써야돼서 좋지 않다.
+  - notification은 indexer에 바로 구현하자. setInterval()을 활용해 볼 생각이다.
+- 포스트모텀을 진행했다. 아래는 그 과정에서 배웠던것들 요약
+
+  - RDB는 기본적으로 스케일이 힘들다. CAP를 싹 다 만족을 못한다. 블록체인 트릴레마 같은 느낌
+    - C: Consistency - 데이터 요청시 가장 최신의 데이터 혹은 실패를 리턴한다. 여러 DB 노드에 동일한 쿼리를 날리면 동일한 응답이 와야 한다.
+    - A: Availability - 모든 요청에 대해 정상적인 응답을 한다. (이건 liveness 랑 비슷?)
+    - P: Partition Tolerance - 노드간의 통신 장애가 발생하더라도 동작해야 한다.
+    - Network로 연결된 분산된 데이터베이스 시스템은 이 3가지 중 2가지만 충족할 수 있고, 모두를 충족할수는 없다.
+  - 근데 다시 찾아보니까 RDB가 스케일하기가 힘들다는건 [RDB를 제대로 사용하지 못해서라는 의견](https://www.quora.com/Why-is-relational-database-difficult-to-scale)이 꽤 많이 보인다...
+  - 근데 또 아닌것 같기도하고 ㅋㅋㅋ 뭐가 뭔지 모르겠다. [이 글](https://stackoverflow.com/questions/3423193/why-nosql-say-traditional-rdbms-is-not-good-at-scalable)도 참고해볼만 하다.
+  - 스케일링이 horizontal과 vertical로 나뉘는것 같다.
+  - RDB는 트래픽을 그러면 어떻게 버티는가?
+    - master, slave 구성을 사용한다. master는 write용 DB, slave는 read 전용.
+    - 쓰기 가능한 DB를 무턱대고 3대로 만들면 각 노드에 트랜잭션이 날라올 때, 서로간에 충돌이 생기면 조정을 어떻게 해야할지, 컨시스턴시 어떻게 유지하고 어떤 DB 인스턴스가 끊겼을 때 sync 복구 어떻게 할거냐 이런 문제들이 있다. 컨센서스랑 비슷한 느낌....이네
+    - 그래서 대안으로 만든게 트래픽 구성을 보면 대부분의 워크로드들이 리드가 8이고 쓰기가 2다. 15:1일수도 있음
+    - 왜냐면 DB write 하는 코드가 별로 없음. 거의 대부분의 앱들이 다 그럼
+    - 그래서 slave를 만들어서 확장을 하자. master랑 주기적으로 sync만 한다. read replica라고 한다.
+    - 얘네들은 4~50 ms sync lag을 가지고 master랑 sync가 된다.
+  - DB트랜잭션 안에서는 온체인 트랜잭션을 날리면 안된다. (예외: lock을 잡지 않을때면 가능) 최대한 lock을 짧게 가져가야 한다.
+  - pessimistic_write는 굉장히 강력한 lock이다. lock이 걸린 데이터에 대해 읽을수도 없다.
+    - 이건 select for update를 할 경우에만 해야 한다.
+  - eager relation
+    - 관계된 테이블을 무조건 로딩한다. 즉 join한다.
+    - 문제는 join된 테이블에도 lock을 걸게되는것이다. 만약 유저 개인별 데이터가 공통 데이터와 관계되어 있다면, 여기다가 무턱대고 lock을 걸어버리면 바로 데드락 나는것이다.
+  - Summary
+    - select for update면 pessimistic write lock이다.
+    - lock의 범위를 생각하자.
+    - 특히 join 되면 같이 락이 걸리는것임을 유념하자. relation 관련 lock에는 조심해야 한다.
+
+- code4arena contest
+  - 가입만 해두고 안봤는데 직접 해보려고 보니까 말 그대로 야생이라는 생각이 든다.
+  - 보안이슈 잡기는 커녕 이 거대한 코드베이스를 이해하기에도 벅차다는 느낌.
+  - 내가 관심있는 프로젝트나 컨테스트로 올라온 코드베이스는 한번 코드리딩을 각 잡고 해보면 어떨까.
+  - 어딧말고 그냥 내 개발력 향상에도 도움이 될 것 같다.
+- RACE-13 오답노트
+  - Inline assembly 이해가 어렵다. string에 대한 abi encoding이 어떻게 이뤄지는지, 0x20단위가 아니라 0x28과 같은 주소에 mstore를 하면 어떻게 되는건지 이해가 잘안된다.
+  - 내일 다시 살펴보자.
+- 저녁 컨디션이 그렇게 좋지는 않다. 집중도 잘 안되고 아무것도 하기가 싫은 기분이 든다.
+  - 근데 또 TIL 정리하면서 조금 힘이 난다.
