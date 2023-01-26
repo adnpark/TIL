@@ -31,3 +31,34 @@
     - address, address payable
     - 그리고 address payable에는 transfer와 send라는 member가 추가적으로 있다.
     - _그래서 type conversion이 필요했던것! `payable(address)`_
+
+### Wed, Jan 25
+
+- 알고리즘 강의 재개
+  - Linear Search 알고리즘 Typescript로 구현해봄
+  - 내일은 Binary Search 구현해보자.
+- 사이드 프로젝트
+  - 그냥 원래 하던거 일단 하기로 함... 어차피 토이 프로젝트 느낌처럼 배우는것에 더 의미가 있었으니까
+  - solidity에서 string은 length 멤버가 없다는걸 알게됨! 그래서 bytes로 변환해서 length를 계산해야 함
+  - 문제는 string의 문자가 무엇이냐에 따라 bytes로 변환시에 length가 달라질 수 있음! (특수 문자인 경우 3개의 바이트로 표현될수도 있다!)
+  - 따라서 정확한 string의 length를 얻기 위해서는 이를 반드시 고려해야함!
+- Solidity 101
+  - 58~61
+  - bytes and string
+    - 둘 다 특수한 형태의 array임
+    - string은 bytes와 동일하지만 length나 index로 접근 불가능
+    - Use bytes for arbitrary-length raw byte data and string for arbitrary-length string (UTF-8) data
+    - bytes가 byte[]보다 효율적임. bytes[]는 element 사이에 31 padding bytes를 추가하기 때문.
+    - 물론 길이를 완전히 특정할 수 있다면 bytes1 to bytes32를 쓰는게 좋다.
+  - Memory Arrays
+    - storage와 다르게 memory array는 size를 다시 설정할 수 없음
+    - 따라서 .push member function 사용 불가능함
+    - 그래서 memory에서 array를 다루려면 미리 필요한 size를 지정해주거나, 모든 element를 새로운 memory array에 복붙하는 수 밖에 없음
+
+### Thu, Jan 26
+
+- 주로 이슈 대응을 했다.
+- SQL 쿼리 짤일이 있었는데, 여전히 기본기가 안잡혀있는 느낌이다. SQL 쿼리에 익숙해지는 연습이 필요하다.
+- Solidity 101
+  - 55~57
+  - Data location 다시 개념 정리했다.
