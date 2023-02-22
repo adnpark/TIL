@@ -20,3 +20,22 @@
   - 동일한 스페셜 오브젝트 홀더의 경우 mint를 한번에 호출해도됨. 이렇게 하면 트랜잭션 수를 굉장히 많이 줄일 수 있음
 
 ### 2월 16일 목요일
+
+- Docker 기본 지식을 공부했음
+
+  - Docker란?
+  - Dockerfile이란?
+    - WORKDIR란?
+    - COPY란?
+      - COPY package.json, package-lock.json을 먼저 하는 이유는?
+  - Docker Compose란?
+
+- ## [yarn set version이 안먹힐 경우 어떻게 하면 되는가?](https://velog.io/@god5612/yarn-set-version-version-%EC%95%88%EB%A8%B9%ED%9E%90-%EA%B2%BD%EC%9A%B0)
+
+### 2월 17일 금요일
+
+### 2월 18일 토요일
+
+- 이해가 안되는거
+  - 왜 OOP를 쓰는지? OOP 스타일로 코드를 작성하는게 다른 스타일에 비해서 뭐가 어떻게 좋은건지?
+  - OOP에서 의존성 주입과 제어역전은 왜 사용하는건지? 그게 왜 좋은건지?
